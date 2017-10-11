@@ -66,8 +66,24 @@ body {
   margin-bottom: 16px; }
 
 body.compact .cours > div {
-  display: none; }
+  display: none;
+}
 
+.layout-line {
+  display: flex;
+  justify-content: space-between
+}
+
+.item-title {
+  .gc-title-menu {
+    opacity: .1;
+  }
+  &:hover {
+    .gc-title-menu {
+      opacity: 1;
+    }
+  }
+}
 
 .tabs  {
   display: flex;

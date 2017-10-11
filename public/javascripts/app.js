@@ -2,6 +2,11 @@ let md = function(str){
     return str ? markdown.toHTML(str) : ''
 };
 
+////////////////////////////////////////////////////////////////////////////////
+//
+// MODEL
+//
+////////////////////////////////////////////////////////////////////////////////
 class NiveauCollection extends Array {
     constructor(niveaux){
         super();
@@ -15,10 +20,33 @@ var Niveaux;
 
 let Cours = {
     template: `<li class="cours">
-    <span>
+    <h4 class="item-title layout-line">
         <strong>{{ cours.label}}</strong>
-        <a @click.stop="handlerEdit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-    </span>
+        <nav class="btn-group gc-title-menu">
+            <a class="btn btn-xs btn-default" @click.stop.prevent="handlerEdit">
+                <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                
+            <a class="btn btn-xs btn-default" title="Déplacer après"
+                @click.prevent.stop="handlerMoveAfter(cours)">
+                <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                
+            <a class="btn btn-xs btn-default" title="Déplacer avant"
+                @click.prevent.stop="handlerMoveBefore(cours)">
+                <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+
+            <a class="btn btn-xs btn-default" title="Couper cette cours"
+                @click.prevent.stop="handlerCut(cours)">
+                <i class="fa fa-scissors" aria-hidden="true"></i></a>
+
+            <a class="btn btn-xs btn-default" title="Copier cette cours"
+                @click.prevent.stop="handlerCopy(cours)">
+                <i class="fa fa-clone" aria-hidden="true"></i></i></a>
+
+            <a class="btn btn-xs btn-default" title="Coller après cette séquence"
+                @click.prevent.stop="handlerPaste(cours)">
+                <i class="fa fa-clipboard" aria-hidden="true"></i></a>
+        </nav>
+    </h4>
     <div v-if="formData">
             <div class="form-group">
                 <input type="text" class="form-control"
@@ -41,7 +69,7 @@ let Cours = {
         </div>
     <div class="cours-description" v-show="open" v-html="markdown(cours.description)"></div>
     <div class="cours-content" v-show="open" v-html="cours.content"></div>
-    
+
     </li>`,
     props:['cours', 'open'],
     data(){
@@ -78,11 +106,37 @@ let Session = {
         Cours
     },
     template: `<article class="session session-list-item">
-        <h3 @click="session.open = !session.open">
-            <i class="fa  fa-caret-down" v-show="session.open == true"></i>
-            <i class="fa  fa-caret-right" v-show="session.open == false"></i>
-            <strong>{{ session.label}}</strong>
-            <a @click.stop="handlerEdit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+        <h3 @click="session.open = !session.open" class="layout-line item-title">
+            <div>
+                <i class="fa  fa-caret-down" v-show="session.open == true"></i>
+                <i class="fa  fa-caret-right" v-show="session.open == false"></i>
+                <strong>{{ session.label}}</strong>
+                <small>{{ session.countCours }} cours</small>
+            </div>
+             <nav class="btn-group gc-title-menu">
+                <a class="btn btn-xs btn-default" @click.stop.prevent="handlerEdit">
+                    <i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    
+                <a class="btn btn-xs btn-default" title="Déplacer après"
+                    @click.prevent.stop="handlerMoveAfter(session)">
+                    <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                    
+                <a class="btn btn-xs btn-default" title="Déplacer avant"
+                    @click.prevent.stop="handlerMoveBefore(session)">
+                    <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+
+                <a class="btn btn-xs btn-default" title="Couper cette session"
+                    @click.prevent.stop="handlerCut(session)">
+                    <i class="fa fa-scissors" aria-hidden="true"></i></a>
+
+                <a class="btn btn-xs btn-default" title="Copier cette session"
+                    @click.prevent.stop="handlerCopy(session)">
+                    <i class="fa fa-clone" aria-hidden="true"></i></i></a>
+
+                <a class="btn btn-xs btn-default" title="Coller après cette séquence"
+                    @click.prevent.stop="handlerPaste(session)">
+                    <i class="fa fa-clipboard" aria-hidden="true"></i></a>
+            </nav>
         </h3>
         <div v-if="formData">
             <div class="form-group">
@@ -100,11 +154,11 @@ let Session = {
             </div>
         </div>
         <div v-else>
-               
-    
+
+
                 <p v-html="markdown(session.description)"></p>
             </div>
-    
+
                 <ul>
                     <cours v-for="c in session.cours" :cours="c" :open="session.open"></cours>
                 </ul>
@@ -143,30 +197,34 @@ let Sequence = {
     template:
         `
 <article class="sequence sequence-list-item" :class="sequence.selected ? 'selected' : ''">
-    <h2 @click="sequence.open = !sequence.open">
+    <h2 @click="sequence.open = !sequence.open" class="layout-line item-title">
+        <div class="gc-label">
             <i class="fa fa-folder-open" v-show="sequence.open"></i>
             <i class="fa fa-folder" v-show="!sequence.open"></i>
             {{ sequence.label}}
-            <nav class="btn-group">
+            <small>( {{ sequence.countSession }} session(s) / {{ sequence.countCours }} cours)</small>
+        </div>
+            <nav class="btn-group gc-title-menu">
                 <a class="btn btn-xs btn-default" @click.stop.prevent="handlerEdit">
                     <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    
-                <a class="btn btn-xs btn-default" title="Déplacer après" 
+
+                <a class="btn btn-xs btn-default" title="Déplacer après"
                     @click.prevent.stop="handlerMoveSequenceAfter(sequence)">
                     <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
-                <a class="btn btn-xs btn-default" title="Déplacer avant" 
+                    
+                <a class="btn btn-xs btn-default" title="Déplacer avant"
                     @click.prevent.stop="handlerMoveSequenceBefore(sequence)">
                     <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
-                    
-                <a class="btn btn-xs btn-default" title="Couper" 
+
+                <a class="btn btn-xs btn-default" title="Couper"
                     @click.prevent.stop="handlerCut(sequence)">
                     <i class="fa fa-scissors" aria-hidden="true"></i></a>
-                    
-                <a class="btn btn-xs btn-default" title="Copier cette séquence" 
+
+                <a class="btn btn-xs btn-default" title="Copier cette séquence"
                     @click.prevent.stop="handlerCopy(sequence)">
                     <i class="fa fa-clone" aria-hidden="true"></i></i></a>
-                    
-                <a class="btn btn-xs btn-default" title="Coller après cette séquence" v-show="sequenceClipboard.length > 0" 
+
+                <a class="btn btn-xs btn-default" title="Coller après cette séquence" v-show="sequenceClipboard.length > 0"
                     @click.prevent.stop="handlerPaste(sequence)">
                     <i class="fa fa-clipboard" aria-hidden="true"></i></a>
             </nav>
@@ -276,6 +334,27 @@ class SequenceModel {
         })
     }
 
+    /**
+     * Retourne le nombre de sessions.
+     */
+    get countSession(){
+      return this.sessions.length;
+    }
+
+    /**
+     * Retourne le nombre de cours.
+     */
+    get countCours(){
+      let total = 0;
+      this.sessions.forEach( session => {
+         total += session.countCours;
+      })
+      return total;
+    }
+
+    /**
+     * Retourne le corpus utilisé pour le recherche textuel.
+     */
     get corpus(){
         var c = this.label +" " +this.description + " " + this.content;
         this.sessions.forEach(s=>{
@@ -299,6 +378,9 @@ class SessionModel {
         datas.cours.forEach(s=>{
             this.cours.push(new CoursModel(s));
         })
+    }
+    get countCours(){
+      return this.cours.length;
     }
     get corpus(){
         var c = this.label +" " +this.description + " " + this.content;
@@ -326,16 +408,16 @@ let App = {
     components: {
         Sequence
     },
-    template: `<div class="container content application">   
+    template: `<div class="container content application">
     <nav class="tabs">
-        <span v-for="n, i in niveaux" 
-            @click="selectedNiveau  = i" 
+        <span v-for="n, i in niveaux"
+            @click="selectedNiveau  = i"
             class="tab" :class="selectedNiveau == i ? 'selected' : ''">
             <span>
                 {{ n.label }}
                 <span class="nbr">{{ n.sequences.length }}</span>
             </span>
-            
+
         </span>
         <span @click="handlerNewNiveau" class="tab">
             <i>Nouveau</i>
@@ -349,18 +431,18 @@ let App = {
         <nav>
             <input type="search" class="form-control lg" v-model="search" />
         </nav>
-        
+
         <a class="btn btn-default" @click="pasteSequence(null, 'before')" v-if="sequenceClipboard.length > 0  && sequencesFiltered.length > 0">Coller la séquence ici</a>
-    
+
         <sequence v-for="sequence in sequencesFiltered" :sequence="sequence" :sequenceClipboard="sequenceClipboard"
             @cutsequence="cutSequence"
             @pastsequence="pasteSequence"
             @copysequence="copySequence"
             @movesequenceafter="moveSequenceAfter"
             @movesequencebefore="moveSequenceBefore"></sequence>
-            
+
          <a class="btn btn-default" @click="pasteSequence()" v-if="sequenceClipboard.length > 0" >Coller la séquence ici</a>
-            
+
     </section>
 </div>`,
     data(){

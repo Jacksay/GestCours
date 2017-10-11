@@ -76,6 +76,15 @@ body {
 body.compact .cours > div {
   display: none; }
 
+.layout-line {
+  display: flex;
+  justify-content: space-between; }
+
+.item-title .gc-title-menu {
+  opacity: .1; }
+.item-title:hover .gc-title-menu {
+  opacity: 1; }
+
 .tabs {
   display: flex;
   font-size: 1.4em; }
