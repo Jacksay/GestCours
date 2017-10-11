@@ -1,0 +1,760 @@
+{
+  "niveaux": [
+    {
+      "id": "1",
+      "label": "5\u00e8me",
+      "description": "Premi\u00e8re ann\u00e9e",
+      "color": "#3c8e56",
+      "sequences": [
+        {
+          "id": "4",
+          "niveau_id": "1",
+          "label": "Secuencia 1 : Me presento",
+          "description": "nom, pr\u00e9nom, \u00e2ge, domicile, nationalit\u00e9, fr\u00e8res et soeurs, animaux de compagnie",
+          "content": null,
+          "goal": "**PROYECTO** : **EOI** Al final de la secuencia, ser\u00e1s capaz de preguntar y contestar a las preguntas para conocerse",
+          "sessions": [
+            {
+              "id": "4",
+              "label": "Sesi\u00f3n 1 : Mi nombre, mi apellido",
+              "description": "nom pr\u00e9nom",
+              "cours": [
+                {
+                  "id": "2",
+                  "label": "Je comprends une pr\u00e9sentation",
+                  "description": "**CO** \u00bfC\u00f3mo te llamas ?\r\n**CO** Un nuevo alumno *(nvAMME 5 p16, pe3)*",
+                  "content": "<p><strong>Doc 1<\/strong> : &iquest;C&oacute;mo te llamas ?<\/p>\r\n\r\n<p>R&eacute;p&eacute;tition en classe enti&egrave;re puis bin&ocirc;me puis ping-pong<\/p>\r\n\r\n<p><strong>TE<\/strong> : &iquest;C&oacute;mo te llamas ?&nbsp; -&gt;&nbsp; me llamo ...<\/p>\r\n\r\n<p>&iquest;Cu&aacute;l es tu nombre ?&nbsp; -&gt;&nbsp; Mi nombre es ....<\/p>\r\n\r\n<p>&iquest;Cu&aacute;l es tu apellido ?&nbsp; -&gt;&nbsp; Mi apellido es ...<\/p>"
+                }
+              ]
+            },
+            {
+              "id": "5",
+              "label": "Sesi\u00f3n 2 : Mi edad, mi domicilio",
+              "description": "\u00e2ge, nombres 11 \u00e0 15",
+              "cours": [
+                {
+                  "id": "3",
+                  "label": "Je peux donner mon \u00e2ge",
+                  "description": "**CE** \u00bfCu\u00e1ntos a\u00f1os tienes ?",
+                  "content": "<p>Repaso : ping-pong des noms et pr&eacute;noms<\/p>\r\n\r\n<p><strong>doc <\/strong>CE &iquest;Cu&aacute;ntos a&ntilde;os tienes ? (nv AMME 5, p.20)<\/p>\r\n\r\n<p>R&eacute;ponse aux questions puis corrections en classe enti&egrave;re<\/p>\r\n\r\n<p>Travail sur les nombres de 11 &agrave; 15<\/p>\r\n\r\n<p><strong>TE <\/strong>: &iquest;Cu&aacute;ntos a&ntilde;os tienes ?&nbsp; -&gt;&nbsp; tengo ... a&ntilde;os<\/p>"
+                },
+                {
+                  "id": "20",
+                  "label": "Je peux dire o\u00f9 j'habite",
+                  "description": "**CO** ou **CE** \u00bfD\u00f3nde vives?\r\n*doc* les pronoms interrogatifs",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "6",
+              "label": "Sesi\u00f3n 3 : Mi nacionalidad, mi pa\u00eds, mi origen",
+              "description": "pays, nationalit\u00e9s, nombre de 12 \u00e0 19",
+              "cours": [
+                {
+                  "id": "5",
+                  "label": "Je peux donner ma nationalit\u00e9",
+                  "description": "**CE** \u00bfDe d\u00f3nde eres ?",
+                  "content": null
+                },
+                {
+                  "id": "56",
+                  "label": "Je peux dire quelles langues je parle",
+                  "description": "**EOI** Idiomas en Espa\u00f1a *(Reporteros 5 p.23)*",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "7",
+              "label": "Sesi\u00f3n 4 : Mis hermanos y mis mascotas",
+              "description": "combien, fr\u00e8res et soeurs",
+              "cours": [
+                {
+                  "id": "6",
+                  "label": "Je peux dire combien j'ai de fr\u00e8res et soeurs",
+                  "description": "**CO** \u00a1 Hola chico !",
+                  "content": null
+                },
+                {
+                  "id": "55",
+                  "label": "Je peux parler de mes animaux de compagnie",
+                  "description": "**CO** \u00bf Qui\u00e9n eres ? *(Juntos 1A p.20 pe12)*\r\n*doc* Las mascotas\r\n**CO** El pollito p\u00edo",
+                  "content": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "7",
+          "niveau_id": "1",
+          "label": "Secuencia 0 : Para empezar (10 cours)",
+          "description": "les salutations, la prononciation, l'alphabet, l'accentuation",
+          "content": null,
+          "goal": "**PROYECTO** : Ilustro mi cuaderno y decoro la clase con carteles",
+          "sessions": [
+            {
+              "id": "17",
+              "label": "Sesi\u00f3n 1 : Saludar y despedirse",
+              "description": "bonjour le matin, bonjour l'apr\u00e8s-midi, au revoir, comment vas-tu ?",
+              "cours": [
+                {
+                  "id": "16",
+                  "label": "Je suis capable de dire bonjour et au revoir de diff\u00e9rentes fa\u00e7ons ; et demander comment \u00e7a va",
+                  "description": "*doc* Los saludos\r\n*juego* balade en classe : saludo y \u00bfqu\u00e9 tal?",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "18",
+              "label": "Sesi\u00f3n 2 : Saber pronunciar",
+              "description": "les phon\u00e8mes diff\u00e9rents",
+              "cours": [
+                {
+                  "id": "19",
+                  "label": "J'apprends \u00e0 prononcer les phon\u00e8mes diff\u00e9rents du fran\u00e7ais",
+                  "description": "**EO** Aprendo a pronunciar correctamente *(M\u00e1s Alto 1A)*",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "19",
+              "label": "Sesi\u00f3n 3 : Conocer el alfabeto",
+              "description": "la prononciation des lettres, quelques mots utiles en classe",
+              "cours": [
+                {
+                  "id": "17",
+                  "label": "je d\u00e9couvre la prononciation des diff\u00e9rentes lettres",
+                  "description": "*doc* El alfabeto *(nv AMME 5\u00e8, p.17)*",
+                  "content": null
+                },
+                {
+                  "id": "18",
+                  "label": "Je suis capable d'\u00e9peler et de deviner des mots",
+                  "description": "*exo* Deletrear\r\n*chanson* el alfabeto espa\u00f1ol",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "25",
+              "label": "Sesi\u00f3n 6 : En clase de espa\u00f1ol",
+              "description": "Les consignes de clase, le vocabulaire de classe, le mat\u00e9riel scolaire",
+              "cours": [
+                {
+                  "id": "37",
+                  "label": "Je peux reconna\u00eetre les consignes de classe",
+                  "description": "*doc*  images et consignes \u00e0 mettre en relation",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "26",
+              "label": "Sesi\u00f3n 5 : Entender informaciones en espa\u00f1ol",
+              "description": "***Cultura*** : d\u00e9couverte des pays hispaniques, trouver des informations",
+              "cours": [
+                {
+                  "id": "24",
+                  "label": "Je d\u00e9couvre l'\u00e9tendue de la langue espagnole",
+                  "description": "**CE** Hablamos espa\u00f1ol en el mundo *(nv AMME 5\u00e8, p.14)*",
+                  "content": null
+                },
+                {
+                  "id": "39",
+                  "label": "Je suis capable de trouver des informations",
+                  "description": "**CE** Parque Nacional Los Glaciares *(GJ 1A p.??)*",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "30",
+              "label": "Sesi\u00f3n 4 : Saber acentuar",
+              "description": "les r\u00e8gles d'accentuation, la syllabe tonique",
+              "cours": [
+                {
+                  "id": "38",
+                  "label": "Je comprends le syst\u00e8me de l'accentuation en espagnol",
+                  "description": "**CO + CE** *exos* accentue les mots\r\n*doc* Les r\u00e8gles de l'accentuation",
+                  "content": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "9",
+          "niveau_id": "1",
+          "label": "Secuencia 2 : \u00bf C\u00f3mo soy ?",
+          "description": "la description physique, les couleurs, le caract\u00e8re ; tener, ser, llevar",
+          "content": null,
+          "goal": "**PROYECTO** : **EE** Haz un cartel de tu monstruo y descr\u00edbelo.",
+          "sessions": [
+            {
+              "id": "22",
+              "label": "Sesi\u00f3n 1 : Mi cara",
+              "description": "les cheveux : longueur, forme et couleur, les accessoires ; tener",
+              "cours": [
+                {
+                  "id": "32",
+                  "label": "Je peux d\u00e9crire mes cheveux et la couleur de mes yeux",
+                  "description": "*doc* : la cara (\u00e0 compl\u00e9ter)\r\n**CE** : El pelo de Clara",
+                  "content": null
+                },
+                {
+                  "id": "33",
+                  "label": "Je peux parler des accessoires",
+                  "description": "**EOC** : se d\u00e9crire, d\u00e9crire quelqu'un\r\n**CE** : Dibujar la cara del personaje",
+                  "content": null
+                },
+                {
+                  "id": "35",
+                  "label": "Je d\u00e9couvre les parties du visage",
+                  "description": "*doc* : El cuerpo y la cara de Mart\u00edn \r\n**CO** : Los hermanos Malasombra\r\n*Juego* : \u00bfQui\u00e9n es qui\u00e9n?",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "23",
+              "label": "Sesi\u00f3n 2 : Mi estatura",
+              "description": "la taille, la corpulence, les parties du corps ; ser",
+              "cours": [
+                {
+                  "id": "34",
+                  "label": "Je peux me d\u00e9crire de fa\u00e7on plus compl\u00e8te",
+                  "description": "*doc* : El aspecto f\u00edsico (2)\r\n*canci\u00f3n* : cabeza, hombro, rodilla y pie\r\n*exo* : Tapa de juegos\r\n**EOC** : *travail en classe enti\u00e8re*",
+                  "content": null
+                },
+                {
+                  "id": "36",
+                  "label": "Je peux d\u00e9crire de fa\u00e7on plus compl\u00e8te",
+                  "description": "**EE** : Los extraterrestres (*cf Delphine*)",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "24",
+              "label": "Sesi\u00f3n 3 : Mi monstruo",
+              "description": "les couleurs, les parties du corps, les caract\u00e9ristiques, les accords en genre et en nombre ; ser - tener",
+              "cours": []
+            },
+            {
+              "id": "48",
+              "label": "Sesi\u00f3n 4 : Mi personalidad",
+              "description": "adjectifs de personnalit\u00e9 ; ser",
+              "cours": []
+            }
+          ]
+        },
+        {
+          "id": "10",
+          "niveau_id": "1",
+          "label": "Secuencia 3 : \u00bfCon qui\u00e9n vivo?",
+          "description": "la famille, la famille royale espagnole, les familles diff\u00e9rentes",
+          "content": null,
+          "goal": "**PROYECTO** : **EOC** Je pr\u00e9sente ma famille \u00e0 partir de l'arbre g\u00e9n\u00e9alogique",
+          "sessions": [
+            {
+              "id": "27",
+              "label": "Sesi\u00f3n 1 : Los miembros de la familia",
+              "description": "parents, enfants, grands-parents, oncles, cousins, neveux",
+              "cours": [
+                {
+                  "id": "25",
+                  "label": "Introduction \u00e0 la s\u00e9quence : la famille royale",
+                  "description": "photo : la famille royale en vacances\r\nphoto : La famille royale avec grands-parents",
+                  "content": null
+                },
+                {
+                  "id": "26",
+                  "label": "Conna\u00eetre les diff\u00e9rents liens de parent\u00e9",
+                  "description": "**CE** : La familia de Carlos\r\ndoc : les adjectifs possessifs\r\nrepaso : le pluriel",
+                  "content": null
+                },
+                {
+                  "id": "27",
+                  "label": "Comprendre la composition des noms de famille espagnole",
+                  "description": "**CE** : Los apellidos en Espa\u00f1a",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "28",
+              "label": "Sesi\u00f3n 2 : La familia Real espa\u00f1ola",
+              "description": "pr\u00e9sentation de la famille royale et liens de parent\u00e9",
+              "cours": [
+                {
+                  "id": "28",
+                  "label": "D\u00e9couvrir la famille royale espagnole",
+                  "description": "**CO** : La familia real de Espa\u00f1a (*Video ELE A1*)",
+                  "content": null
+                },
+                {
+                  "id": "29",
+                  "label": "Etre capable de construire un arbre g\u00e9n\u00e9alogique \u00e0 partir d'une description",
+                  "description": "**CE** + **EOI** : El \u00e1rbol geneal\u00f3gico de la familia real espa\u00f1ola",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "29",
+              "label": "Sesi\u00f3n 3 : Familias diferentes",
+              "description": "famille monoparentale, famille recompos\u00e9e, demi-fr\u00e8re",
+              "cours": [
+                {
+                  "id": "30",
+                  "label": "D\u00e9couvrir trois types de familles diff\u00e9rentes",
+                  "description": "**CO** : Tres familias (*nv AMME 1A p.68*)",
+                  "content": null
+                },
+                {
+                  "id": "31",
+                  "label": "Etre capable de construire un arbre g\u00e9n\u00e9alogique d'une famille complexe",
+                  "description": "**CE** : Familias diferentes",
+                  "content": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "11",
+          "niveau_id": "1",
+          "label": "Secuencia 4 : \u00bfD\u00f3nde vivo?",
+          "description": "la maison, les meubles, les adverbes de lieu",
+          "content": null,
+          "goal": "**PROYECTO** : **EE** je d\u00e9cris ma maison et la disposition de ma chambre",
+          "sessions": []
+        },
+        {
+          "id": "12",
+          "niveau_id": "1",
+          "label": "Cultura 1 A1 : El D\u00eda de los Muertos",
+          "description": "D\u00e9couverte d'une tradition mexicaine : La f\u00eate des Morts",
+          "content": null,
+          "goal": "**PROYECTO** : Hacer un Tzompantli",
+          "sessions": [
+            {
+              "id": "35",
+              "label": "Sesi\u00f3n 1 : Introducci\u00f3n a la fiesta  CO",
+              "description": "*video* : Anuncio TV Azteca",
+              "cours": []
+            },
+            {
+              "id": "36",
+              "label": "Sesi\u00f3n 2 : El D\u00eda de los Muertos  CE",
+              "description": "explication r\u00e9sum\u00e9\r\nles \u00e9l\u00e9ments essentiels",
+              "cours": []
+            },
+            {
+              "id": "37",
+              "label": "Sesi\u00f3n 3 : La canci\u00f3n de los esqueletos",
+              "description": "*canci\u00f3n* : los esqueletos\r\nla hora",
+              "cours": []
+            }
+          ]
+        },
+        {
+          "id": "16",
+          "niveau_id": "1",
+          "label": "Secuencia 3 : Mi familia",
+          "description": "parler de sa famille, les liens de parent\u00e9",
+          "content": null,
+          "goal": "Presentar a tu familia con una presentaci\u00f3n *Genially*",
+          "sessions": [
+            {
+              "id": "49",
+              "label": "Sesi\u00f3n 0 : introducci\u00f3n al tema",
+              "description": "d\u00e9couvrir les membres de la famille proche",
+              "cours": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "label": "4\u00e8me",
+      "description": null,
+      "color": "#43f446",
+      "sequences": []
+    },
+    {
+      "id": "3",
+      "label": "3\u00e8me",
+      "description": null,
+      "color": "#6827a0",
+      "sequences": [
+        {
+          "id": "5",
+          "niveau_id": "3",
+          "label": "Secuencia 1 : Participar en un casting",
+          "description": "pr\u00e9sentation, description physique, caract\u00e8re, go\u00fbts, le pr\u00e9sent de l'indicatif ; une \u00e9mission TV : *Masterchef*",
+          "content": null,
+          "goal": "**PROYECTO** : **EOC** Al final de la secuencia, tendr\u00e1s que grabar una presentaci\u00f3n de ti : presentaci\u00f3n r\u00e1pida, descripci\u00f3n f\u00edsica y de car\u00e1cter y hablar de tus gustos",
+          "sessions": [
+            {
+              "id": "8",
+              "label": "Sesi\u00f3n 1 : Me presento",
+              "description": "pr\u00e9sentation, nombres de 0 \u00e0 100, jours et mois",
+              "cours": [
+                {
+                  "id": "21",
+                  "label": "Je comprends la pr\u00e9sentation de quelqu'un et je peux compl\u00e9ter une fiche d'informations",
+                  "description": "**CO** *vid\u00e9o* Mi primer videoblog\r\n*exo* questionnement sur Laura",
+                  "content": null
+                },
+                {
+                  "id": "42",
+                  "label": "Je peux poser des questions et r\u00e9pondre pour compl\u00e9ter une fiche d'inscription",
+                  "description": "**EOI** Mi ficha de informaci\u00f3n y la de mi compa\u00f1ero",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "9",
+              "label": "Sesi\u00f3n 4 : Mis gustos y aficiones",
+              "description": "gustar, loisirs, quantificateurs",
+              "cours": [
+                {
+                  "id": "50",
+                  "label": "Je d\u00e9couvre comment parler de ses go\u00fbts",
+                  "description": "**CE** Yolanda\r\n*doc* Construction de GUSTAR",
+                  "content": null
+                },
+                {
+                  "id": "51",
+                  "label": "Je d\u00e9couvre les go\u00fbts et loisirs de quelqu'un",
+                  "description": "**CE** Nur",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "10",
+              "label": "Sesi\u00f3n 2 : Me describo fisicamente",
+              "description": "description physique, cheveux, stature, d\u00e9tails",
+              "cours": [
+                {
+                  "id": "43",
+                  "label": "Je comprends la description de quelqu'un",
+                  "description": "**CE** La ventaja de ser Magda\r\n*exo* description 2 personnages\r\n*doc* Mapa mental descripci\u00f3n f\u00edsica",
+                  "content": null
+                },
+                {
+                  "id": "44",
+                  "label": "Je suis capable de me d\u00e9crire physiquement de fa\u00e7on d\u00e9taill\u00e9e",
+                  "description": "**CE** \u00bf Le voy a gustar ?\r\n*doc* Les quantificateurs",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "11",
+              "label": "Sesi\u00f3n 3 : Mi personalidad",
+              "description": "caract\u00e8re, qualit\u00e9s, d\u00e9fauts, connecteurs logiques",
+              "cours": [
+                {
+                  "id": "45",
+                  "label": "Je d\u00e9couvre des adjectifs de personnalit\u00e9",
+                  "description": "*EE* Mi personalidad\r\n*doc* Les quantificateurs",
+                  "content": null
+                },
+                {
+                  "id": "48",
+                  "label": "Je comprends la description de la personnalit\u00e9 de qqn, ses nuances",
+                  "description": "**CE** \u00bf Ser o parecer ? + **EE** et **EOC**",
+                  "content": null
+                },
+                {
+                  "id": "49",
+                  "label": "Je peux r\u00e9pondre \u00e0 un test de personnalit\u00e9",
+                  "description": "**CE** \u00bf Eres t\u00edmido o extrovertido ? (*An\u00edmate cycle 4*, p.39) + doc internet",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "33",
+              "label": "Sesi\u00f3n 0 : Introducci\u00f3n al tema",
+              "description": "vid\u00e9os *casting abierto* et vid\u00e9os *presentaci\u00f3n de candidatos*",
+              "cours": [
+                {
+                  "id": "46",
+                  "label": "Je d\u00e9couvre le th\u00e8me de la s\u00e9quence",
+                  "description": "**CO** *video* casting abierto\r\n**CO** *video* casting en grande",
+                  "content": null
+                },
+                {
+                  "id": "47",
+                  "label": "Je comprends les parties attendues en PF",
+                  "description": "**CO** *video* presentaci\u00f3n de candidatos : *Mar\u00eda* , *Martina*, *Mauro*\r\n**PF** Sujet du projet final",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "34",
+              "label": "Sesi\u00f3n 5 : Presentaci\u00f3n general",
+              "description": "Compilation de tous les points \u00e9tudi\u00e9s, Masterchef",
+              "cours": [
+                {
+                  "id": "52",
+                  "label": "Je rep\u00e8re les informations essentielles d'une pr\u00e9sentation",
+                  "description": "**CO** *video* Presentaci\u00f3n de Mar\u00eda y Xavier en Masterchef Junior",
+                  "content": null
+                },
+                {
+                  "id": "54",
+                  "label": "Evaluaci\u00f3n",
+                  "description": "**CO** *video* Presentaci\u00f3n de Mauro 12",
+                  "content": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "6",
+          "niveau_id": "3",
+          "label": "Secuencia 2 : Mi colegio",
+          "description": "rentr\u00e9e des classes, mati\u00e8res scolaires, emplois du temps, calendrier scolaire, rattrapages, uniforme",
+          "content": null,
+          "goal": "**PROYECTO** : **EE** Hacer un folleto de promoci\u00f3n del colegio ideal",
+          "sessions": [
+            {
+              "id": "13",
+              "label": "Sesi\u00f3n 4 : Estudiar en verano",
+              "description": "rattrapages, syst\u00e8me de notation, comparaison",
+              "cours": [
+                {
+                  "id": "10",
+                  "label": "Je comprends le syst\u00e8me de rattrapage en Espagne",
+                  "description": "**CO**  Ex\u00e1menes en septiembre",
+                  "content": null
+                },
+                {
+                  "id": "11",
+                  "label": "Je comprends des t\u00e9moignages d'\u00e9l\u00e8ves",
+                  "description": "**CE**  Estudiar en verano",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "14",
+              "label": "Sesi\u00f3n 1 : El horario escolar",
+              "description": "emploi du temps, mati\u00e8res scolaires, heures",
+              "cours": [
+                {
+                  "id": "12",
+                  "label": "Je peux parler de mon emploi du temps",
+                  "description": "**EOC** El horario de clase",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "15",
+              "label": "Sesi\u00f3n 5 : Llevar uniforme",
+              "description": "l'uniforme, les obligations, les avantages et les inconv\u00e9nients",
+              "cours": [
+                {
+                  "id": "15",
+                  "label": "je peux donner mon avis sur le port de l'uniforme",
+                  "description": "*doc* El uniforme convencional\r\n**CE** + **EOC** El uniforme, \u00bfa favor o en contra?",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "16",
+              "label": "Sesi\u00f3n 2 : El calendario escolar",
+              "description": "les vacances, les p\u00e9riodes,      les saisons  ???",
+              "cours": [
+                {
+                  "id": "13",
+                  "label": "Je comprends les rythmes scolaires espagnols",
+                  "description": "**CO** Cristobal, un alumno espa\u00f1ol",
+                  "content": null
+                },
+                {
+                  "id": "14",
+                  "label": "Je peux comparer les calendriers espagnols et fran\u00e7ais",
+                  "description": "**EOC** Calendario escolar",
+                  "content": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "8",
+          "niveau_id": "3",
+          "label": "Secuencia 0 : Para empezar",
+          "description": "R\u00e9vision des consignes de classe, du vocabulaire utile en classe",
+          "content": null,
+          "goal": null,
+          "sessions": [
+            {
+              "id": "20",
+              "label": "Sesi\u00f3n 1 : Saludar y despedirse",
+              "description": "se saluer, dire au revoir",
+              "cours": [
+                {
+                  "id": "22",
+                  "label": "R\u00e9vision des salutations",
+                  "description": "**CE** En clase de espa\u00f1ol",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "31",
+              "label": "Sesi\u00f3n 2 : Las consignas de clase",
+              "description": "presentation, questionnement",
+              "cours": [
+                {
+                  "id": "23",
+                  "label": "Je comprends les consignes de classe",
+                  "description": "**CE** + **EOI** En clase de espa\u00f1ol (2)",
+                  "content": "<p>1. **CE** Faire le document : retrouver les consignes et les relier aux dessins<\/p>\r\n\r\n<p>2. **EOI** Jeu du Jakadi : le prof donne les ordres, les &eacute;l&egrave;ves ex&eacute;cutent. Puis un &eacute;l&egrave;ve joue le r&ocirc;le du prof<\/p>"
+                },
+                {
+                  "id": "41",
+                  "label": "Je revois le lexique de base",
+                  "description": "*doc* lexique de r\u00e9vision\r\n*doc* presente del indicativo VR + SET",
+                  "content": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "13",
+          "niveau_id": "3",
+          "label": "Cultura 1 A2 : El D\u00eda de los Muertos",
+          "description": "Origines de la f\u00eate \u00e0 travers un film d'animation\r\n*film* El libro de la vida",
+          "content": null,
+          "goal": "_",
+          "sessions": [
+            {
+              "id": "38",
+              "label": "Sesi\u00f3n 1 : El Libro de la Vida parte 1 y 2 CO",
+              "description": "Introduction au film\r\nParties 1 et 2",
+              "cours": []
+            },
+            {
+              "id": "39",
+              "label": "Sesi\u00f3n 2 : Libro de la Vida Parte 3 y 2A CO",
+              "description": "corrections partie 2\r\nen el cementerio\r\nla apuesta",
+              "cours": []
+            },
+            {
+              "id": "40",
+              "label": "Sesi\u00f3n 3 : Los elementos esenciales",
+              "description": "*video* TV Azteca\r\nelementos y altar",
+              "cours": []
+            },
+            {
+              "id": "41",
+              "label": "Sesi\u00f3n 4 : Verdad o mentira  CE",
+              "description": "CE explication D\u00eda de los Muertos",
+              "cours": []
+            }
+          ]
+        },
+        {
+          "id": "14",
+          "niveau_id": "3",
+          "label": "Mi vida de alumno",
+          "description": "rutina diaria - asignaturas y horarios - uniforme escolar - actividades extraescolares\r\nverbes \u00e0 diphtongue et affaiblissement - soler - gustar",
+          "content": null,
+          "goal": "EE - Escribir un folleto para promocionar el colegio ideal",
+          "sessions": []
+        },
+        {
+          "id": "15",
+          "niveau_id": "3",
+          "label": "EPI : Agua en Espa\u00f1a",
+          "description": "D\u00e9couvrir la g\u00e9ographie de l'Espagne, la situation pr\u00e9ocupante de l'eau.\r\nComprendre les causes et les risques.\r\nDonner des conseils sur l'utilisation domestique.",
+          "content": null,
+          "goal": "Vas a hacer una presentaci\u00f3n num\u00e9rica de la situaci\u00f3n en Espa\u00f1a y dar consejos para mejorarla.",
+          "sessions": [
+            {
+              "id": "42",
+              "label": "Sesi\u00f3n 0 : Mapa - escasez de agua prevista por 2040 (2h)",
+              "description": "*mapa*, *art\u00edculo de prensa*",
+              "cours": []
+            },
+            {
+              "id": "43",
+              "label": "Sesi\u00f3n 1 : La situaci\u00f3n en Espa\u00f1a (2h)",
+              "description": "mapa : las comunidades espa\u00f1olas (y ciudades importantes), mapa : Hidrograf\u00eda en Espa\u00f1a",
+              "cours": [
+                {
+                  "id": "57",
+                  "label": "Las comunidades y las ciudades espa\u00f1olas",
+                  "description": "saber situar, conocer las comunidades y sus capitales",
+                  "content": null
+                },
+                {
+                  "id": "58",
+                  "label": "La situaci\u00f3n hidrogr\u00e1fica en Espa\u00f1a",
+                  "description": "CE - comprendre un texte (V ou F)\r\nEOI - la comparaci\u00f3n",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "44",
+              "label": "Sesi\u00f3n 2 : El desierto (2h)",
+              "description": "Comprendre ce qu'est un d\u00e9sert.\r\nComprendre les causes de la d\u00e9sertification",
+              "cours": [
+                {
+                  "id": "59",
+                  "label": "Un desierto en Espa\u00f1a",
+                  "description": "CO : Vivo en un desierto",
+                  "content": null
+                },
+                {
+                  "id": "60",
+                  "label": "Una situaci\u00f3n preocupante",
+                  "description": "CE : El sur de Espa\u00f1a se convertir\u00e1 en un desierto (art\u00edculo)",
+                  "content": null
+                }
+              ]
+            },
+            {
+              "id": "45",
+              "label": "Sesi\u00f3n 3 : La escasez de agua",
+              "description": "Causas y consecuencias.\r\nvideo en Colombia",
+              "cours": []
+            },
+            {
+              "id": "46",
+              "label": "Sesi\u00f3n 4 : El agua en casa",
+              "description": "Nuestro consumo (y gasto) de agua\r\nCampa\u00f1a de sensibilizaci\u00f3n : Total",
+              "cours": []
+            },
+            {
+              "id": "47",
+              "label": "Sesi\u00f3n 5 : Consejos para prevenir los gastos",
+              "description": "le conseil, l'interdiction",
+              "cours": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

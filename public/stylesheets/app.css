@@ -1,0 +1,104 @@
+body {
+  background: #eee;
+  color: #333;
+  font-family: 'Open Sans';
+  padding-top: 50px; }
+
+.card, .sequence-list-item, .session-list-item {
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 8px;
+  margin-bottom: 16px; }
+
+.card h2, .sequence-list-item h2, .session-list-item h2, .card h3, .sequence-list-item h3, .session-list-item h3, .card h4, .sequence-list-item h4, .session-list-item h4, .card h5, .sequence-list-item h5, .session-list-item h5 {
+  margin: 0; }
+
+.card h2 i, .sequence-list-item h2 i, .session-list-item h2 i, .card h3 i, .sequence-list-item h3 i, .session-list-item h3 i, .card h4 i, .sequence-list-item h4 i, .session-list-item h4 i, .card h5 i, .sequence-list-item h5 i, .session-list-item h5 i {
+  font-weight: 100;
+  opacity: .8; }
+
+.card p, .sequence-list-item p, .session-list-item p {
+  margin: 0; }
+
+.card h2, .sequence-list-item h2, .session-list-item h2 {
+  font-size: 24px; }
+
+.card h3, .sequence-list-item h3, .session-list-item h3 {
+  font-size: 20px; }
+
+.card ul, .sequence-list-item ul, .session-list-item ul {
+  padding: 0;
+  padding-left: 10px;
+  list-style: none;
+  margin-bottom: 0; }
+
+.cours {
+  margin: 0;
+  background: #FAFAFA;
+  margin-top: 4px;
+  padding: 4px;
+  border: thin #DDD solid;
+  font-size: 12px; }
+
+.cours strong {
+  font-size: 14px; }
+
+.sessions {
+  margin-top: 10px; }
+
+.sequence {
+  border-left: solid 4px #DDD; }
+
+.sequence h2 {
+  margin-bottom: 8px; }
+
+.session {
+  border-left: solid 4px #DDD;
+  border-top: solid 1px #DDD; }
+
+.tab-content {
+  border: 1px solid #ddd;
+  border-top: none; }
+
+.goal {
+  margin-top: 8px;
+  padding: 1em;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.1); }
+
+.cours-description p {
+  white-space: pre-line; }
+
+.sequence-list-item {
+  border-bottom: 2px solid #000;
+  margin-bottom: 16px; }
+
+body.compact .cours > div {
+  display: none; }
+
+.tabs {
+  display: flex;
+  font-size: 1.4em; }
+  .tabs .tab {
+    color: #999;
+    background: #ddd;
+    padding: .5em;
+    font-weight: normal; }
+    .tabs .tab.selected {
+      background: white;
+      color: #333333; }
+    .tabs .tab .nbr {
+      font-size: .6em;
+      background: #333333;
+      color: #FAFAFA;
+      padding: .25em;
+      display: inline-block;
+      border-radius: .75em;
+      position: relative;
+      top: -.5em; }
+  .tabs :first-child {
+    border-radius: .5em 0 0 0; }
+
+/*# sourceMappingURL=style.css.map */
+
+/*# sourceMappingURL=app.css.map */
