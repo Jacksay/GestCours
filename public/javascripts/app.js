@@ -25,25 +25,25 @@ let Cours = {
         <nav class="btn-group gc-title-menu">
             <a class="btn btn-xs btn-default" @click.stop.prevent="handlerEdit">
                 <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                
+
             <a class="btn btn-xs btn-default" title="Déplacer après"
-                @click.prevent.stop="handlerMoveAfter(cours)">
+                @click.prevent.stop="$emit('moveafter',cours)">
                 <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
-                
+
             <a class="btn btn-xs btn-default" title="Déplacer avant"
-                @click.prevent.stop="handlerMoveBefore(cours)">
+                @click.prevent.stop="$emit('movebefore',cours)">
                 <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
 
             <a class="btn btn-xs btn-default" title="Couper cette cours"
-                @click.prevent.stop="handlerCut(cours)">
+                @click.prevent.stop="$emit('cut',cours)">
                 <i class="fa fa-scissors" aria-hidden="true"></i></a>
 
             <a class="btn btn-xs btn-default" title="Copier cette cours"
-                @click.prevent.stop="handlerCopy(cours)">
+                @click.prevent.stop="$emit('copy', cours)">
                 <i class="fa fa-clone" aria-hidden="true"></i></i></a>
 
             <a class="btn btn-xs btn-default" title="Coller après cette séquence"
-                @click.prevent.stop="handlerPaste(cours)">
+                @click.prevent.stop="$emit('paste', cours)">
                 <i class="fa fa-clipboard" aria-hidden="true"></i></a>
         </nav>
     </h4>
@@ -86,13 +86,14 @@ let Cours = {
             }
         },
         handlerCancelEdit(){
-            this.formData = null
+            this.formData = null;
 
         },
-        handlerValidEdit(){
+        handlerValidlEdit(){
             this.cours.label = this.formData.label;
             this.cours.description = this.formData.description;
             this.cours.content = this.formData.content;
+            this.formData = null;
         },
         markdown(s){
             return md(s)
@@ -116,13 +117,13 @@ let Session = {
              <nav class="btn-group gc-title-menu">
                 <a class="btn btn-xs btn-default" @click.stop.prevent="handlerEdit">
                     <i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    
+
                 <a class="btn btn-xs btn-default" title="Déplacer après"
-                    @click.prevent.stop="handlerMoveAfter(session)">
+                    @click.prevent.stop="$emit('moveafter',session)">
                     <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
-                    
+
                 <a class="btn btn-xs btn-default" title="Déplacer avant"
-                    @click.prevent.stop="handlerMoveBefore(session)">
+                    @click.prevent.stop="$emit('movebefore', session)">
                     <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
 
                 <a class="btn btn-xs btn-default" title="Couper cette session"
@@ -153,15 +154,17 @@ let Session = {
             <button class="btn btn-primary" @click="handlerValidlEdit">Enregistrer</button>
             </div>
         </div>
-        <div v-else>
+        <div v-show="session.open">
+            <p v-html="markdown(session.description)"></p>
+        </div>
 
-
-                <p v-html="markdown(session.description)"></p>
-            </div>
-
-                <ul>
-                    <cours v-for="c in session.cours" :cours="c" :open="session.open"></cours>
-                </ul>
+        <ul v-show="session.open">
+            <cours v-for="c in session.cours"
+                @moveafter="moveCoursAfter(cours)"
+                @movebefore="moveCoursBefore(cours)"
+                :cours="c" 
+                :open="session.open"></cours>
+        </ul>
             </article>`,
     data(){
         return {
@@ -170,6 +173,12 @@ let Session = {
     },
 
     methods: {
+        moveCoursAfter(cours){
+
+        },
+        moveCoursBefore(cours){
+
+        },
         handlerEdit(){
             this.formData = {
                 label: this.session.label,
@@ -211,7 +220,7 @@ let Sequence = {
                 <a class="btn btn-xs btn-default" title="Déplacer après"
                     @click.prevent.stop="handlerMoveSequenceAfter(sequence)">
                     <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
-                    
+
                 <a class="btn btn-xs btn-default" title="Déplacer avant"
                     @click.prevent.stop="handlerMoveSequenceBefore(sequence)">
                     <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
@@ -256,7 +265,11 @@ let Sequence = {
             <p v-html="markdown(sequence.description)"></p>
             <div class="goal" style="background-color: rgba(60,142,86,.25)" v-html="markdown(sequence.goal)"></div>
             <div class="sessions">
-                <session v-for="session in sequence.sessions" :session="session"></session>
+                <session v-for="session in sequence.sessions" 
+                       @movebefore="handlerMoveSessionBefore"
+                       @moveafter="handlerMoveSessionAfter"
+                         :session="session"
+                         ></session>
             </div>
         </div>
     </div>
@@ -275,6 +288,18 @@ let Sequence = {
         }
     },
     methods: {
+        handlerMoveSessionAfter(session){
+            var index = this.sequence.sessions.indexOf(session);
+            if( index < this.sequence.sessions.length ){
+                this.sequence.sessions.splice(index+1, 0, this.sequence.sessions.splice(index, 1)[0] );
+            }
+        },
+        handlerMoveSessionBefore(session){
+            var index = this.sequence.sessions.indexOf(session);
+            if( index > 0){
+                this.sequence.sessions.splice(index-1, 0, this.sequence.sessions.splice(index, 1)[0] );
+            }
+        },
         markdown(s){
             return md(s)
         },
@@ -318,132 +343,61 @@ let Sequence = {
     }
 };
 
-
-class SequenceModel {
-    constructor(datas){
-        //console.log(datas);
-        this.label = datas.label;
-        this.description = datas.description;
-        this.content = datas.content;
-        this.goal = datas.goal;
-        this.open = false;
-        this.selected = false;
-        this.sessions = [];
-        datas.sessions.forEach(s=>{
-            this.sessions.push(new SessionModel(s));
-        })
-    }
-
-    /**
-     * Retourne le nombre de sessions.
-     */
-    get countSession(){
-      return this.sessions.length;
-    }
-
-    /**
-     * Retourne le nombre de cours.
-     */
-    get countCours(){
-      let total = 0;
-      this.sessions.forEach( session => {
-         total += session.countCours;
-      })
-      return total;
-    }
-
-    /**
-     * Retourne le corpus utilisé pour le recherche textuel.
-     */
-    get corpus(){
-        var c = this.label +" " +this.description + " " + this.content;
-        this.sessions.forEach(s=>{
-            c += s.corpus;
-        })
-        return c.toLowerCase();
-    }
-}
-
 var selectedSequences = [];
 var clipboardSequences = [];
-
-
-class SessionModel {
-    constructor(datas){
-        this.label = datas.label;
-        this.description = datas.description;
-        this.open = false;
-        this.edit = false;
-        this.cours = [];
-        datas.cours.forEach(s=>{
-            this.cours.push(new CoursModel(s));
-        })
-    }
-    get countCours(){
-      return this.cours.length;
-    }
-    get corpus(){
-        var c = this.label +" " +this.description + " " + this.content;
-        this.cours.forEach(s=>{
-            c += s.corpus;
-        })
-        return c.toLowerCase();
-    }
-}
-
-
-class CoursModel {
-    constructor(datas){
-        this.label = datas.label;
-        this.description = datas.description;
-        this.content = datas.content;
-    }
-    get corpus(){
-        var c = this.label +" " +this.description + " " + this.content;
-        return c.toLowerCase();
-    }
-}
 
 let App = {
     components: {
         Sequence
     },
     template: `<div class="container content application">
-    <nav class="tabs">
-        <span v-for="n, i in niveaux"
-            @click="selectedNiveau  = i"
-            class="tab" :class="selectedNiveau == i ? 'selected' : ''">
-            <span>
-                {{ n.label }}
-                <span class="nbr">{{ n.sequences.length }}</span>
+    <div class="main">
+        <nav class="tabs">
+            <span v-for="n, i in niveaux"
+                @click="selectedNiveau  = i"
+                class="tab" :class="selectedNiveau == i ? 'selected' : ''">
+                <span>
+                    {{ n.label }}
+                    <span class="nbr">{{ n.sequences.length }}</span>
+                </span>
+    
             </span>
-
-        </span>
-        <span @click="handlerNewNiveau" class="tab">
-            <i>Nouveau</i>
-        </span>
-    </nav>
-    <section class="sequences">
-        <div v-if="selectedNiveau != null">
-            Edition du label
-            <input type="text" v-model="niveaux[selectedNiveau].label" class="form-control lg">
-        </div>
-        <nav>
-            <input type="search" class="form-control lg" v-model="search" />
+            <span @click="handlerNewNiveau" class="tab">
+                <i>Nouveau</i>
+            </span>
         </nav>
-
-        <a class="btn btn-default" @click="pasteSequence(null, 'before')" v-if="sequenceClipboard.length > 0  && sequencesFiltered.length > 0">Coller la séquence ici</a>
-
-        <sequence v-for="sequence in sequencesFiltered" :sequence="sequence" :sequenceClipboard="sequenceClipboard"
-            @cutsequence="cutSequence"
-            @pastsequence="pasteSequence"
-            @copysequence="copySequence"
-            @movesequenceafter="moveSequenceAfter"
-            @movesequencebefore="moveSequenceBefore"></sequence>
-
-         <a class="btn btn-default" @click="pasteSequence()" v-if="sequenceClipboard.length > 0" >Coller la séquence ici</a>
-
-    </section>
+        <section class="sequences">
+            
+    
+            <a class="btn btn-default" @click="pasteSequence(null, 'before')" v-if="sequenceClipboard.length > 0  && sequencesFiltered.length > 0">Coller la séquence ici</a>
+    
+            <sequence v-for="sequence in sequencesFiltered" :sequence="sequence" :sequenceClipboard="sequenceClipboard"
+                @cutsequence="cutSequence"
+                @pastsequence="pasteSequence"
+                @copysequence="copySequence"
+                @movesequenceafter="moveSequenceAfter"
+                @movesequencebefore="moveSequenceBefore"></sequence>
+    
+             <a class="btn btn-default" @click="pasteSequence()" v-if="sequenceClipboard.length > 0" >Coller la séquence ici</a>
+    
+        </section>
+    </div>
+    <aside class="properties">
+        <div class="niveau-info" v-if="currentNiveau">
+            <h3>{{ currentNiveau.label }}</h3>
+            <div v-if="selectedNiveau != null" class="input-group">
+                Edition du label
+                <input type="text" v-model="niveaux[selectedNiveau].label" class="form-control lg">
+            </div>
+            <nav>
+                <input type="search" class="form-control lg" v-model="search" />
+            </nav>
+            <nav>
+                <a href="#" @click="handlerNewSequence()" class="btn btn-primary">Nouvelle séqence</a>
+            </nav>
+        </div>
+   
+    </aside>
 </div>`,
     data(){
         return {
@@ -451,7 +405,13 @@ let App = {
             dblClickTimer: (new Date()).getTime(),
             niveaux: [],
             sequenceClipboard: [],
-            search: ""
+            search: "",
+            initialized: false
+        }
+    },
+    watch: {
+        niveaux(){
+            console.log("niveaux a changé !");
         }
     },
     computed: {
@@ -478,6 +438,9 @@ let App = {
         }
     },
     methods: {
+        handlerNewSequence(){
+            this.currentNiveau.sequences.push(new SequenceModel());
+        },
         handlerKeyDown(){
           console.log(arguments);
         },
@@ -504,7 +467,9 @@ let App = {
                             'sequences': []
                         };
                         n.sequences.forEach(s=>{
-                            niveau.sequences.push(new SequenceModel(s));
+                            console.log(s);
+                            if( s )
+                                niveau.sequences.push(new SequenceModel(s));
                         })
                         this.niveaux.push(niveau);
                     });

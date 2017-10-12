@@ -10,16 +10,19 @@
     <!--<link rel="stylesheet" href="/mavon-editor/dist/css/index.css">-->
 </head>
 <body>
+   
     <div id="app"></div>
 
     <script src="/vue/dist/vue.js"></script>
     <script src="/vue-resource/dist/vue-resource.js"></script>
     <script src="/markdown/lib/markdown.js"></script>
     <script src="/vuex/dist/vuex.js"></script>
+    <script src="/javascripts/model/SequenceModel.js"></script>
+    <script src="/javascripts/model/SessionModel.js"></script>
+    <script src="/javascripts/model/CoursModel.js"></script>
     <script src="/javascripts/app.js"></script>
     <script>
         //import mavonEditor from 'mavon-editor'
-
 
         Vue.filter('markdown', str => markdown.toHTML(str));
         //Vue.use(mavoneditor);

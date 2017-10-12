@@ -1,56 +1,77 @@
 body {
-  background: #eee;
+  background: #ddd;
   color: #333;
   font-family: 'Open Sans';
-  padding-top: 50px; }
+  color: #555; }
 
+p, h1, h2, h3, h4, h5 {
+  color: #555; }
+
+/*
 .card, .sequence-list-item, .session-list-item {
   font-size: 14px;
   background: rgba(255, 255, 255, 0.7);
   padding: 8px;
   margin-bottom: 16px; }
-
 .card h2, .sequence-list-item h2, .session-list-item h2, .card h3, .sequence-list-item h3, .session-list-item h3, .card h4, .sequence-list-item h4, .session-list-item h4, .card h5, .sequence-list-item h5, .session-list-item h5 {
   margin: 0; }
-
 .card h2 i, .sequence-list-item h2 i, .session-list-item h2 i, .card h3 i, .sequence-list-item h3 i, .session-list-item h3 i, .card h4 i, .sequence-list-item h4 i, .session-list-item h4 i, .card h5 i, .sequence-list-item h5 i, .session-list-item h5 i {
   font-weight: 100;
   opacity: .8; }
-
 .card p, .sequence-list-item p, .session-list-item p {
   margin: 0; }
-
 .card h2, .sequence-list-item h2, .session-list-item h2 {
   font-size: 24px; }
-
 .card h3, .sequence-list-item h3, .session-list-item h3 {
   font-size: 20px; }
-
 .card ul, .sequence-list-item ul, .session-list-item ul {
   padding: 0;
   padding-left: 10px;
   list-style: none;
   margin-bottom: 0; }
+*/
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+h2 {
+  font-size: 1.6em;
+  margin: 0;
+  padding: .25em; }
+
+h3 {
+  font-size: 1.2em;
+  margin: 0;
+  padding: .25em; }
+
+h4 {
+  font-size: 1em;
+  margin: 0;
+  padding: .25em; }
+
+p {
+  margin: 0; }
 
 .cours {
-  margin: 0;
+  margin: .5em;
   background: #FAFAFA;
   margin-top: 4px;
   padding: 4px;
   border: thin #DDD solid;
   font-size: 12px; }
-
-.cours strong {
-  font-size: 14px; }
+  .cours strong {
+    font-size: 14px; }
 
 .sessions {
   margin-top: 10px; }
 
 .sequence {
-  border-left: solid 4px #DDD; }
-
-.sequence h2 {
-  margin-bottom: 8px; }
+  border-left: solid 4px #DDD;
+  background: #fff;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2); }
+  .sequence > div {
+    padding: .5em; }
 
 .session {
   border-left: solid 4px #DDD;
@@ -85,6 +106,26 @@ body.compact .cours > div {
 .item-title:hover .gc-title-menu {
   opacity: 1; }
 
+.application {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  padding: 1em; }
+  .application .main {
+    display: flex;
+    flex-direction: column;
+    width: 80%; }
+    .application .main .tabs {
+      height: 2em; }
+    .application .main .sequences {
+      background: #FAFAFA;
+      padding: 1em;
+      height: 90%;
+      overflow: scroll; }
+  .application .properties {
+    padding: 1em;
+    width: 20%; }
+
 .tabs {
   display: flex;
   font-size: 1.4em; }
@@ -94,7 +135,7 @@ body.compact .cours > div {
     padding: .5em;
     font-weight: normal; }
     .tabs .tab.selected {
-      background: white;
+      background: #FAFAFA;
       color: #333333; }
     .tabs .tab .nbr {
       font-size: .6em;
