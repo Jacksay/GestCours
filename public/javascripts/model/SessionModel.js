@@ -1,13 +1,16 @@
 class SessionModel {
-    constructor(datas){
-        this.label = datas.label;
-        this.description = datas.description;
+    constructor(datas = {}){
+        this.label = datas.label || "Nouvelle session";
+        this.description = datas.description || "";
         this.open = false;
         this.edit = false;
         this.cours = [];
-        datas.cours.forEach(s=>{
-            this.cours.push(new CoursModel(s));
-        })
+
+        if( datas.cours ){
+            datas.cours.forEach(s=>{
+                this.cours.push(new CoursModel(s));
+            })
+        }
     }
     get countCours(){
       return this.cours.length;

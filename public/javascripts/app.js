@@ -139,6 +139,7 @@ let Session = {
                     <i class="fa fa-clipboard" aria-hidden="true"></i></a>
             </nav>
         </h3>
+        
         <div v-if="formData">
             <div class="form-group">
                 <input type="text" class="form-control"
@@ -154,16 +155,21 @@ let Session = {
             <button class="btn btn-primary" @click="handlerValidlEdit">Enregistrer</button>
             </div>
         </div>
+        
         <div v-show="session.open">
             <p v-html="markdown(session.description)"></p>
         </div>
 
         <ul v-show="session.open">
-            <cours v-for="c in session.cours"
-                @moveafter="moveCoursAfter(cours)"
-                @movebefore="moveCoursBefore(cours)"
+            <cours v-for="c, k in session.cours"
+                @moveafter="moveCoursAfter(c)"
+                @movebefore="moveCoursBefore(c)" 
+                @cut="handlerCutCours(c)" 
+                @copy="handlerCopyCours(c)" 
+                @paste="handlerPasteCours(c)" 
                 :cours="c" 
                 :open="session.open"></cours>
+            <a @click="handlerNewCours">Nouveau cours</a>    
         </ul>
             </article>`,
     data(){
@@ -173,12 +179,37 @@ let Session = {
     },
 
     methods: {
+        handlerCutCours(c){
+
+        },
+
+        handlerCopyCours(c){
+
+        },
+
+        handlerPasteCours(c){
+
+        },
+
+        handlerNewCours(){
+            this.session.cours.push(new CoursModel());
+        },
+
         moveCoursAfter(cours){
-
+            var index = this.session.cours.indexOf(cours);
+            if( index < this.session.cours.length -1 ){
+                this.session.cours.switchIndex(index, index+1);
+            }
         },
+
         moveCoursBefore(cours){
+            var index = this.session.cours.indexOf(cours);
+            if( index > 0 ){
+                this.session.cours.switchIndex(index, index-1);
+            }
 
         },
+
         handlerEdit(){
             this.formData = {
                 label: this.session.label,
@@ -214,6 +245,9 @@ let Sequence = {
             <small>( {{ sequence.countSession }} session(s) / {{ sequence.countCours }} cours)</small>
         </div>
             <nav class="btn-group gc-title-menu">
+                <a class="btn btn-xs btn-default" @click.stop.prevent="handlerNewSession">
+                    <i class="fa fa-plus" aria-hidden="true"></i></a>
+                    
                 <a class="btn btn-xs btn-default" @click.stop.prevent="handlerEdit">
                     <i class="fa fa-pencil" aria-hidden="true"></i></a>
 
@@ -260,19 +294,19 @@ let Sequence = {
         <button class="btn btn-primary" @click="handlerCancelEdit">Annuler</button>
         <button class="btn btn-primary" @click="handlerValidlEdit">Enregistrer</button>
     </div>
-    <div v-else>
-        <div v-show="sequence.open">
-            <p v-html="markdown(sequence.description)"></p>
-            <div class="goal" style="background-color: rgba(60,142,86,.25)" v-html="markdown(sequence.goal)"></div>
-            <div class="sessions">
-                <session v-for="session in sequence.sessions" 
-                       @movebefore="handlerMoveSessionBefore"
-                       @moveafter="handlerMoveSessionAfter"
-                         :session="session"
-                         ></session>
-            </div>
+
+    <div v-show="!formData && sequence.open">
+        <p v-html="markdown(sequence.description)"></p>
+        <div class="goal" style="background-color: rgba(60,142,86,.25)" v-html="markdown(sequence.goal)"></div>
+        <div class="sessions">
+            <session v-for="session, k in sequence.sessions" 
+                   @movebefore="handlerMoveSessionBefore"
+                   @moveafter="handlerMoveSessionAfter"
+                     :session="session"
+                     ></session>
         </div>
     </div>
+
 </article>`,
     props: {
         'sequence': Object,
@@ -288,12 +322,17 @@ let Sequence = {
         }
     },
     methods: {
+        handlerNewSession(){
+            this.sequence.sessions.push(new SessionModel());
+        },
+
         handlerMoveSessionAfter(session){
             var index = this.sequence.sessions.indexOf(session);
             if( index < this.sequence.sessions.length ){
                 this.sequence.sessions.splice(index+1, 0, this.sequence.sessions.splice(index, 1)[0] );
             }
         },
+
         handlerMoveSessionBefore(session){
             var index = this.sequence.sessions.indexOf(session);
             if( index > 0){
@@ -396,7 +435,6 @@ let App = {
                 <a href="#" @click="handlerNewSequence()" class="btn btn-primary">Nouvelle séqence</a>
             </nav>
         </div>
-   
     </aside>
 </div>`,
     data(){
@@ -420,6 +458,7 @@ let App = {
                 return this.niveaux[this.selectedNiveau]
             return null
         },
+
         sequencesFiltered(){
             if( !this.currentNiveau )
                 return [];
@@ -441,9 +480,11 @@ let App = {
         handlerNewSequence(){
             this.currentNiveau.sequences.push(new SequenceModel());
         },
+
         handlerKeyDown(){
           console.log(arguments);
         },
+
         handlerNewNiveau(){
             var newNiveau = {
                 label: "Nouveau Niveau",
@@ -467,28 +508,30 @@ let App = {
                             'sequences': []
                         };
                         n.sequences.forEach(s=>{
-                            console.log(s);
-                            if( s )
-                                niveau.sequences.push(new SequenceModel(s));
+                            niveau.sequences.push(new SequenceModel(s));
                         })
                         this.niveaux.push(niveau);
                     });
+                    this.selectedNiveau = 0;
             }, err => {
                 console.error(err)
             });
         },
+
         cutSequence(sequence){
             var index = this.currentNiveau.sequences.indexOf(sequence);
             if( index >= 0 ){
                 this.sequenceClipboard = [this.currentNiveau.sequences.splice(index, 1)[0]];
             }
         },
+
         copySequence(sequence){
             var index = this.currentNiveau.sequences.indexOf(sequence);
             if( index >= 0 ){
                 this.sequenceClipboard = [this.currentNiveau.sequences[index]];
             }
         },
+
         pasteSequence(sequence, position){
             console.log("COLLER après", sequence);
             if( sequence == null ){
@@ -503,6 +546,7 @@ let App = {
             }
             this.sequenceClipboard = [];
         },
+
         moveSequenceAfter(sequence){
             var fromIndex = this.currentNiveau.sequences.indexOf(sequence);
             if( fromIndex < this.currentNiveau.sequences.length - 1 ){
@@ -510,6 +554,7 @@ let App = {
                 this.currentNiveau.sequences.switchIndex(fromIndex, toIndex);
             }
         },
+
         moveSequenceBefore(sequence){
             var fromIndex = this.currentNiveau.sequences.indexOf(sequence);
             if( fromIndex > 0 ){
