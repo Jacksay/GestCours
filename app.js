@@ -38,6 +38,33 @@ app.get('/', function(req, res, next) {
     res.end();
 });
 
+/* GET home page. */
+app.post('/', function(req, res, next) {
+    var auth = req.session.auth || false;
+    if( auth ){
+        var d = new Date();
+        var fileBkp = d.getFullYear()+"-" +d.getMonth()+"-"+d.getDate();
+        var data = {
+            "niveaux": JSON.parse(req.body.datas)
+        };
+
+        var fs = require('fs');
+        try {
+            fs.writeFileSync(__dirname + "/data/" +fileBkp +".json", JSON.stringify(data), 'utf8');
+        } catch (err) {
+            res.status(500);
+            res.send("error, impossible d'écrire  le fichier de backup : " + err);
+        }
+        try {
+            fs.writeFileSync(__dirname + "/data/cours.json", JSON.stringify(data), 'utf8');
+        } catch (err) {
+            res.status(500);
+            res.send("error, impossible d'écrire  les données : " + err);
+        }
+        res.end();
+    }
+});
+
 app.get('/datas.json', function(req, res) {
     res.send(JSON.parse(fs.readFileSync(__dirname + '/data/cours.json')));
 });
@@ -45,7 +72,7 @@ app.get('/datas.json', function(req, res) {
 ////////////////////////////////////////////////////////////
 // Authentification
 app.post('/login', function( req, res ){
-    if( req.body.identifiant == "manue" && req.body.motdepasse == "jackisthebest" ){
+    if( req.body.identifiant == "manue" && req.body.motdepasse == "gizmocaca" ){
         req.session.auth = "Manue";
     }
     res.redirect('/');
