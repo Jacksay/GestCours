@@ -60,20 +60,20 @@ let Cours = {
                 <i class="fa fa-clipboard" aria-hidden="true"></i></a>
         </nav>
     </h4>
-    <div v-if="formData">
+    <div v-show="formData">
+            <template v-if="formData">
             <div class="form-group">
                 <input type="text" class="form-control"
                     v-model="formData.label"
                     placeholder="Intitulé du cours">
             </div>
+            </template>
             <div class="form-group">
-                <textarea class="form-control"
-                    v-model="formData.description"
+                <textarea class="form-control description"
                     placeholder="Description du cours"></textarea>
             </div>
             <div class="form-group">
-                <textarea class="form-control"
-                    v-model="formData.content"
+                <textarea class="form-control content"
                     placeholder="Contenu du cours"></textarea>
             </div>
             <button class="btn btn-default" @click="handlerCancelEdit">Annuler</button>
@@ -81,23 +81,46 @@ let Cours = {
             </div>
         </div>
     <div class="cours-description" v-show="open" v-html="markdown(cours.description)"></div>
-    <div class="cours-content" v-show="open" v-html="cours.content"></div>
+    <a v-if="cours.content" @click="details = !details">&hellip;</a>
+    <div class="cours-content" v-show="details" v-html="markdown(cours.content)"></div>
 
     </li>`,
     props:['cours', 'open'],
     data(){
         return {
             formData: null,
-            appBroadcast: appBroadcast
+            details: false,
+            appBroadcast: appBroadcast,
+            mdEditorDescription: null,
+            mdEditorContent:  null
         }
     },
+
     methods: {
+        mdDescription(){
+            if( this.mdEditorDescription == null ){
+                this.mdEditorDescription = new SimpleMDE({ element: this.$el.querySelector('.description') });
+            }
+            return this.mdEditorDescription;
+        },
+        mdContent(){
+            if( this.mdEditorContent == null ){
+                this.mdEditorContent = new SimpleMDE({ element: this.$el.querySelector('.content') });
+            }
+            return this.mdEditorContent;
+        },
         handlerEdit(){
             this.formData = {
                 label: this.cours.label,
                 description: this.cours.description,
                 content: this.cours.content
-            }
+            };
+
+            this.mdDescription().value(this.cours.description);
+            this.mdContent().value(this.cours.content);
+
+            console.log();
+            console.log(this.$el.querySelector('.content'));
         },
         handlerCancelEdit(){
             this.formData = null;
@@ -105,8 +128,8 @@ let Cours = {
         },
         handlerValidlEdit(){
             this.cours.label = this.formData.label;
-            this.cours.description = this.formData.description;
-            this.cours.content = this.formData.content;
+            this.cours.description = this.mdDescription().value();
+            this.cours.content = this.mdContent().value();
             this.formData = null;
             appBroadcast.changed = true;
         },
