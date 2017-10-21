@@ -1,7 +1,7 @@
 
 class CoursModel {
     constructor(datas = {}){
-        this.label = datas.label || "Nouveau cours";
+        this.label = datas.label || "Objectif du cours";
         this.description = datas.description || "";
         this.content = datas.content || "";
     }

@@ -2,6 +2,26 @@ let md = function(str){
     return str ? markdown.toHTML(str) : ''
 };
 
+var decodeEntities = (function() {
+    // this prevents any overhead from creating the object each time
+    var element = document.createElement('div');
+
+    function decodeHTMLEntities (str) {
+        if(str && typeof str === 'string') {
+            // strip script/html tags
+            str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+            str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+            element.innerHTML = str;
+            str = element.textContent;
+            element.textContent = '';
+        }
+
+        return str;
+    }
+
+    return decodeHTMLEntities;
+})();
+
 ////////////////////////////////////////////////////////////////////////////////
 //
 // MODEL
@@ -65,17 +85,19 @@ let Cours = {
             <div class="form-group">
                 <input type="text" class="form-control"
                     v-model="formData.label"
-                    placeholder="Intitulé du cours">
+                    placeholder="Objectif du cours">
             </div>
-            </template>
             <div class="form-group">
                 <textarea class="form-control description"
-                    placeholder="Description du cours"></textarea>
+                    v-model="formData.description" 
+                    placeholder="Activités  Langagières"></textarea>
             </div>
+            </template>
             <div class="form-group">
                 <textarea class="form-control content"
                     placeholder="Contenu du cours"></textarea>
             </div>
+           
             <button class="btn btn-default" @click="handlerCancelEdit">Annuler</button>
             <button class="btn btn-primary" @click="handlerValidlEdit">Enregistrer</button>
             </div>
@@ -83,6 +105,10 @@ let Cours = {
     <div class="cours-description" v-show="open" v-html="markdown(cours.description)"></div>
     <a v-if="cours.content" @click="details = !details">&hellip;</a>
     <div class="cours-content" v-show="details" v-html="markdown(cours.content)"></div>
+    <div v-show="details">
+        <a href="#" @click="toMD()">Convertir le texte étrange (HTML)</a>
+    </div> 
+    
 
     </li>`,
     props:['cours', 'open'],
@@ -97,11 +123,8 @@ let Cours = {
     },
 
     methods: {
-        mdDescription(){
-            if( this.mdEditorDescription == null ){
-                this.mdEditorDescription = new SimpleMDE({ element: this.$el.querySelector('.description') });
-            }
-            return this.mdEditorDescription;
+        toMD(html){
+            this.cours.content = toMarkdown(this.cours.content);
         },
         mdContent(){
             if( this.mdEditorContent == null ){
@@ -116,7 +139,6 @@ let Cours = {
                 content: this.cours.content
             };
 
-            this.mdDescription().value(this.cours.description);
             this.mdContent().value(this.cours.content);
 
             console.log();
@@ -128,7 +150,7 @@ let Cours = {
         },
         handlerValidlEdit(){
             this.cours.label = this.formData.label;
-            this.cours.description = this.mdDescription().value();
+            this.cours.description = this.formData.description;
             this.cours.content = this.mdContent().value();
             this.formData = null;
             appBroadcast.changed = true;
