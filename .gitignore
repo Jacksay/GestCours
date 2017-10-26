@@ -1,4 +1,4 @@
-data/cours.json
+data/*.json
 node_modules
 *~
 .idea

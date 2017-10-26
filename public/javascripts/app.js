@@ -175,7 +175,7 @@ let Session = {
                 <small>{{ session.countCours }} cours</small>
             </div>
              <nav class="btn-group gc-title-menu">
-                <a class="btn btn-xs btn-default" @click.stop.prevent="handlerEdit">
+                <a class="btn btn-xs btn-default" @click.stop.prevent="handlerEdit" title="Modifier">
                     <i class="fa fa-pencil" aria-hidden="true"></i></a>
 
                 <a class="btn btn-xs btn-default" title="Déplacer après"
@@ -186,11 +186,11 @@ let Session = {
                     @click.prevent.stop="$emit('movebefore', session)">
                     <i class="fa fa-arrow-up" aria-hidden="true"></i></a>
 
-                <a class="btn btn-xs btn-default" title="Couper cette session"
+                <a class="btn btn-xs btn-default" title="Couper cette étape"
                     @click.prevent.stop="$emit('cutsession', session)">
                     <i class="fa fa-scissors" aria-hidden="true"></i></a>
 
-                <a class="btn btn-xs btn-default" title="Copier cette session"
+                <a class="btn btn-xs btn-default" title="Copier cette étape"
                     @click.prevent.stop="$emit('copysession', session)">
                     <i class="fa fa-clone" aria-hidden="true"></i></i></a>
             </nav>
@@ -200,12 +200,12 @@ let Session = {
             <div class="form-group">
                 <input type="text" class="form-control"
                     v-model="formData.label"
-                    placeholder="Intitulé de la session">
+                    placeholder="Intitulé de cette étape">
             </div>
             <div class="form-group">
                 <textarea class="form-control"
                     v-model="formData.description"
-                    placeholder="Description de la session"></textarea>
+                    placeholder="Description de l'étape"></textarea>
             </div>
             <button class="btn btn-default" @click="handlerCancelEdit">Annuler</button>
             <button class="btn btn-primary" @click="handlerValidlEdit">Enregistrer</button>
@@ -395,11 +395,11 @@ let Sequence = {
                      ></session>
             <div class="session new-area" @click.stop.prevent="handlerPasteSession" v-show="appBroadcast.clipboardSession.length">
                 <h3><i class="fa fa-paste" aria-hidden="true"></i>
-                <strong>Coller la session ici</strong></h3>
+                <strong>Coller l'étape ici</strong></h3>
             </div>   
             <div class="session new-area" @click.stop.prevent="handlerNewSession">
                 <h3><i class="fa fa-plus" aria-hidden="true"></i>
-                <strong>Nouvelle session</strong></h3>
+                <strong>Nouvelle étape</strong></h3>
             </div>         
                      
         </div>
@@ -510,8 +510,10 @@ let App = {
         <nav class="tabs">
             <span v-for="n, i in niveaux"
                 @click="selectedNiveau  = i"
-                class="tab" :class="selectedNiveau == i ? 'selected' : ''">
+                class="tab" :class="selectedNiveau == i ? 'selected' : ''"
+                v-if="archive == true || n.archive != true">
                 <span>
+                    <i class="fa fa-archive" v-show="n.archive"></i>
                     {{ n.label }}
                     <span class="nbr">{{ n.sequences.length }}</span>
                 </span>
@@ -519,11 +521,14 @@ let App = {
             </span>
             <span @click="handlerNewNiveau" class="tab">
                 <i>Nouveau</i>
+                
             </span>
         </nav>
         <section class="sequences">
             
-    
+            
+            <template v-if="currentNiveau">
+            
             <a class="btn btn-default" @click="pasteSequence(null, 'before')" v-show="sequencesFiltered.length == 0 && sequenceClipboard.length > 0">
                 Coller la séquence ici
             </a>
@@ -549,25 +554,77 @@ let App = {
                     <i class="fa fa-plus"></i> Nouvelle Séquence
                 </h2>
             </div>
-
+            </template>
+            <template v-else>
+                Choisissez un niveau
+            </template>
     
         </section>
     </div>
     <aside class="properties">
+    
+        <a href="#" class="btn btn-default" @click="archive = !archive">
+            <i class="fa fa-archive"></i>
+            <span v-if="archive">Cacher</span>
+            <span v-else>Montrer</span> les archives
+        </a>
+            
+        
         <div class="niveau-info" v-if="currentNiveau">
-            <h3>{{ currentNiveau.label }}</h3>
-            <div v-if="selectedNiveau != null" class="input-group">
-                Edition du label
-                <input type="text" v-model="niveaux[selectedNiveau].label" class="form-control lg">
+
+            <h2>{{ currentNiveau.label }}
+                <i class="fa fa-edit" @click="edit = !edit">   
+            </h2>
+            <div v-if="edit">
+            <p class="help-block">Opération pour l'onglet actif</p>            
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">
+                <i class="fa fa-edit"></i>
+                Intitulé
+                </span>
+                <input type="text" v-model="niveaux[selectedNiveau].label" class="form-control">
             </div>
-            <nav>
+            
+            <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" v-model="niveaux[selectedNiveau].archive">
+                  Classé  comme archive
+                </label>
+            </div>
+            </div>
+            
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">
+                <i class="fa fa-search"></i>              
+                </span>
                 <input type="search" class="form-control lg" v-model="search" />
-            </nav>
-            <button @click="save()">Enregistrer</button>
-            <pre>
-                {{ appBroadcast }}
-            </pre>
+            </div>
+            
+            <section class="resume">
+            <div v-for="sequence,i in sequencesFiltered">
+                <strong>{{ sequence.label}} </strong>
+                <ul v-if="sequence.open">
+                    <li v-for="session, k in sequence.sessions">
+                          {{ session.label }}
+                    <ul>
+                         <li v-for="c in session.cours"> - {{ c.label }}</li> 
+                    </ul>      
+                    </li>
+                </ul>
+            </div>
+            </section>
+
         </div>
+        <div v-else>
+            
+            <p>Selectionner un onglet</p>
+        </div>
+        <hr>
+        <section>
+            <button @click="save()" class="btn btn-lg"  :class="appBroadcast.changed ? 'btn-primary' : 'btn-default'">
+                <i class="fa fa-floppy-o"></i>
+                Enregistrer</button>
+        </section>
     </aside>
 </div>`,
     data(){
@@ -580,7 +637,9 @@ let App = {
             loading: false,
             error:  null,
             initialized: false,
-            appBroadcast:  appBroadcast
+            appBroadcast:  appBroadcast,
+            archive: true,
+            edit: false
         }
     },
     watch: {
@@ -593,6 +652,10 @@ let App = {
             if( this.selectedNiveau != null )
                 return this.niveaux[this.selectedNiveau]
             return null
+        },
+
+        onglets(){
+
         },
 
         sequencesFiltered(){
@@ -657,6 +720,7 @@ let App = {
                             'label': n.label,
                             'description': n.description,
                             'color': n.color,
+                            'archive': n.archive || false,
                             'sequences': []
                         };
                         n.sequences.forEach(s=>{
@@ -665,7 +729,7 @@ let App = {
                         this.niveaux.push(niveau);
                         this.loading = false;
                     });
-                    this.selectedNiveau = 0;
+                    //this.selectedNiveau = 0;
             }, err => {
                     this.loading = false;
                     this.error = err;
@@ -731,12 +795,12 @@ let App = {
     mounted(){
         window.onbeforeunload = function(){
             if( appBroadcast.changed == true )
-                return 'Are you sure you want to leave?';
+                return 'Êtes-vous sûr de voir quitter sans enregistrer ?';
             return;
         };
         window.onunload = function(){
             if( appBroadcast.changed == true )
-                return 'Are you sure you want to leave?';
+                return 'Êtes-vous sûr de voir quitter sans enregistrer ?';
             return;
         };
         /*

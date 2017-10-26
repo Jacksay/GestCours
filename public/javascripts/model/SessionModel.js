@@ -1,6 +1,6 @@
 class SessionModel {
     constructor(datas = {}){
-        this.label = datas.label || "Nouvelle session";
+        this.label = datas.label || "Nouvelle étape";
         this.description = datas.description || "";
         this.open = false;
         this.edit = false;
