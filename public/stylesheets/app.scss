@@ -11,8 +11,12 @@ p, h1, h2, h3, h4, h5 {
   color: #555;
 }
 
+ul {
+  margin-left: .5em;
+  padding-left:.5em;
+}
 
-ul, li {
+ul.cours, li.cours {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -209,6 +213,37 @@ body.compact .cours > div {
   :first-child  {
     border-radius: .5em 0 0 0;
   }
+}
+
+
+.cours-content {
+  padding: 0 1em;
+  p, ul {
+    margin-top: .8em;
+  }
+  ul {
+    margin-top: 0;
+    list-style: square;
+  }
+  ul ul {
+    list-style: circle;
+  }
+  ul, li {
+
+  }
+}
+
+.form-fixed {
+  position: fixed;
+  overflow-y: scroll;
+  background: #fff;
+  box-shadow: -8px 0 8px rgba(0,0,0,.2);
+  padding: 1em;
+  right: 30vw;
+  top: 0;
+  bottom: 0;
+  width: 50vw;
+  z-index: 10;
 }
 
 /*# sourceMappingURL=style.css.map */

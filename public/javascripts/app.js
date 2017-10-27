@@ -92,22 +92,20 @@ let Cours = {
                     v-model="formData.description" 
                     placeholder="Activités  Langagières"></textarea>
             </div>
-            </template>
-            <div class="form-group">
+            
+            
+           </template>
+           <div class="form-group">
                 <textarea class="form-control content"
                     placeholder="Contenu du cours"></textarea>
             </div>
-           
             <button class="btn btn-default" @click="handlerCancelEdit">Annuler</button>
             <button class="btn btn-primary" @click="handlerValidlEdit">Enregistrer</button>
             </div>
         </div>
     <div class="cours-description" v-show="open" v-html="markdown(cours.description)"></div>
     <a v-if="cours.content" @click="details = !details">&hellip;</a>
-    <div class="cours-content" v-show="details" v-html="markdown(cours.content)"></div>
-    <div v-show="details">
-        <a href="#" @click="toMD()">Convertir le texte étrange (HTML)</a>
-    </div> 
+    <div class="cours-content" v-show="details" v-html="cours.content"></div>
     
 
     </li>`,
@@ -128,7 +126,7 @@ let Cours = {
         },
         mdContent(){
             if( this.mdEditorContent == null ){
-                this.mdEditorContent = new SimpleMDE({ element: this.$el.querySelector('.content') });
+                this.mdEditorContent = CKEDITOR.replace(this.$el.querySelector('.content'));
             }
             return this.mdEditorContent;
         },
@@ -139,7 +137,7 @@ let Cours = {
                 content: this.cours.content
             };
 
-            this.mdContent().value(this.cours.content);
+            this.mdContent().setData(this.cours.content);
 
             console.log();
             console.log(this.$el.querySelector('.content'));
@@ -151,7 +149,7 @@ let Cours = {
         handlerValidlEdit(){
             this.cours.label = this.formData.label;
             this.cours.description = this.formData.description;
-            this.cours.content = this.mdContent().value();
+            this.cours.content = this.mdContent().getData();
             this.formData = null;
             appBroadcast.changed = true;
         },
@@ -216,7 +214,7 @@ let Session = {
             <p v-html="markdown(session.description)"></p>
         </div>
 
-        <ul v-show="session.open">
+        <ul v-show="session.open" class="cours">
             <cours v-for="c, k in session.cours"
                 @moveafter="moveCoursAfter(c)"
                 @movebefore="moveCoursBefore(c)" 
@@ -616,7 +614,7 @@ let App = {
 
         </div>
         <div v-else>
-            
+            <button @click="convertCours">Conversion</button>
             <p>Selectionner un onglet</p>
         </div>
         <hr>
@@ -790,6 +788,22 @@ let App = {
                 this.currentNiveau.sequences.switchIndex(fromIndex, toIndex);
                 appBroadcast.changed = true;
             }
+        },
+
+        convertCours(){
+            this.niveaux.forEach(niveau=> {
+                niveau.sequences.forEach(sequence =>{
+                    sequence.sessions.forEach(session =>  {
+                        session.cours.forEach(   cours => {
+                            if( cours.content.indexOf('<p>') != 0 ){
+                                cours.content = md(cours.content);
+                                console.log(cours.content);
+                            }
+                        })
+                    })
+                });
+            })
+
         }
     },
     mounted(){
