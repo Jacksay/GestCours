@@ -44,6 +44,7 @@ app.post('/', function(req, res, next) {
     if( auth ){
         if( req.body.files ){
             console.log('fichiers');
+            res.send("Sauvegarde des fichiers");
             res.end();
             return;
         }

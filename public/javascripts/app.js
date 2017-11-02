@@ -571,7 +571,13 @@ let App = {
         <div class="niveau-info" v-if="currentNiveau">
 
             <h2>{{ currentNiveau.label }}
-                <i class="fa fa-edit" @click="edit = !edit">   
+                <div class="btn-group btn-group-sm" role="group">
+                    <button class="btn btn-default" @click="edit = !edit"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-default"  @click="handlerNiveauOnLeft"><i class="fa fa-arrow-left"></i></button>
+                    <button class="btn btn-default" @click="handlerNiveauOnRight"><i class="fa fa-arrow-right"></i></button>
+                </div>
+                
+                
             </h2>
             <div v-if="edit">
             <p class="help-block">Opération pour l'onglet actif</p>            
@@ -618,6 +624,15 @@ let App = {
             <p>Selectionner un onglet</p>
         </div>
         <hr>
+        <!--
+        <section>
+            <h3>Documents</h3>
+            <form  method="POST">
+                <input type="file" name="files[]">
+                <button type="submit">Envoyer</button>
+            </form>           
+        </section>
+        -->
         <section>
             <button @click="save()" class="btn btn-lg"  :class="appBroadcast.changed ? 'btn-primary' : 'btn-default'">
                 <i class="fa fa-floppy-o"></i>
@@ -692,6 +707,19 @@ let App = {
 
         handlerKeyDown(){
           console.log(arguments);
+        },
+
+        handlerNiveauOnLeft(){
+            if( this.selectedNiveau > 0 ){
+                this.niveaux.switchIndex(this.selectedNiveau, this.selectedNiveau - 1);
+                this.selectedNiveau -= 1;
+            }
+        },
+        handlerNiveauOnRight(){
+            if( this.selectedNiveau < this.niveaux.length - 1 ){
+                this.niveaux.switchIndex(this.selectedNiveau, this.selectedNiveau + 1);
+                this.selectedNiveau += 1;
+            }
         },
 
         handlerNewNiveau(){
