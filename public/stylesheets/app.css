@@ -186,7 +186,8 @@ body.compact .cours > div {
   top: 0;
   bottom: 0;
   width: 50vw;
-  z-index: 10; }
+  z-index: 10;
+  max-height: 550px; }
 
 /*# sourceMappingURL=style.css.map */
 

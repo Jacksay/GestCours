@@ -80,7 +80,7 @@ let Cours = {
                 <i class="fa fa-clipboard" aria-hidden="true"></i></a>
         </nav>
     </h4>
-    <div v-show="formData">
+    <div v-show="formData" class="form-fixed">
             <template v-if="formData">
             <div class="form-group">
                 <input type="text" class="form-control"
@@ -673,6 +673,17 @@ let App = {
             }
         }
     },
+    watch: {
+        'appBroadcast': {
+            handler: function (val){
+                if( val.changed ){
+                    this.save();
+                }
+            },
+            deep: true
+        }
+    },
+
     methods: {
         handlerNewSequence(){
             this.currentNiveau.sequences.push(new SequenceModel());

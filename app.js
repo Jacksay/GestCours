@@ -42,6 +42,12 @@ app.get('/', function(req, res, next) {
 app.post('/', function(req, res, next) {
     var auth = req.session.auth || false;
     if( auth ){
+        if( req.body.files ){
+            console.log('fichiers');
+            res.end();
+            return;
+        }
+
         var d = new Date();
         var fileBkp = d.getFullYear()+"-" +d.getMonth()+"-"+d.getDate();
         var data = {
